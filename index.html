@@ -20,7 +20,7 @@ html, body, #map {
 }
 
 #menuKomoditas{
-    position:absolute;
+    position:fixed;
     top:15px;
     left:60px;
 
@@ -33,7 +33,7 @@ html, body, #map {
 }
 
 #komoditas{
-    width:145px;
+    
     padding:5px;
 }
 
@@ -59,7 +59,7 @@ html, body, #map {
     flex-shrink:0;
 }
 #judulPeta{
-    position: absolute;
+    position: fixed;
     top: 15px;
     right: 15px;
     z-index: 9999;
@@ -90,16 +90,26 @@ html, body, #map {
 
 /* HP */
 @media (max-width:768px){
+
     #menuKomoditas{
-        width:150px;
-        top:10px;
-        left:50px;
+        top: auto;
+        bottom: 20px;
+        left: 10px;
+        width: 150px;
     }
+
 }
 #menuKomoditas select{
     width:100%;
     font-size:14px;
     padding:6px;
+}
+@media (max-width:768px){
+
+    #judulPeta{
+        display:none;
+    }
+
 }
 </style>
         <title>Peta Persebaran Ketersediaan Pangan Kabupaten Brebes</title>
