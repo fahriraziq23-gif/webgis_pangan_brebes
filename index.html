@@ -18,68 +18,44 @@ html, body, #map {
     padding: 0;
     margin: 0;
 }
-.leaflet-control.custom-menu{
 
-    background:white;
-    padding:10px;
-    border-radius:8px;
-    box-shadow:0 2px 8px rgba(0,0,0,.25);
-
-    width:220px;
-
-    font-family:Arial;
+#menuKomoditas{
+    position:absolute;
+    top:90px;
+    left:10px;
+    z-index:9999;
+    background:rgba(255, 255, 255, 0.250);
+    padding:5px;
+    border-radius:4px;
+    box-shadow:0 0 8px rgba(0, 0, 0, 0.168);
+    
 }
 
-.leaflet-control.custom-menu h4{
-
-    margin:0 0 10px 0;
-    font-size:16px;
+#komoditas{
+    width:145px;
+    padding:5px;
 }
 
-.leaflet-control.custom-menu select{
-
-    width:100%;
-    padding:6px;
-    margin-bottom:10px;
+#legend{
+    margin-top:15px;
+    border-top:1px solid #ddd;
+    padding-top:10px;
 }
 
 .legend-item{
-
     display:flex;
     align-items:center;
-    margin-bottom:6px;
+    margin-bottom:8px;
     font-size:13px;
+    color:#333;
 }
 
 .warna{
-
-    width:16px;
-    height:16px;
+    width:18px;
+    height:18px;
     margin-right:8px;
-    border:1px solid #666;
-}
-
-@media(max-width:768px){
-
-.leaflet-control.custom-menu{
-
-    width:170px;
-    font-size:12px;
-
-}
-
-.leaflet-control.custom-menu h4{
-
-    font-size:14px;
-
-}
-
-.legend-item{
-
-    font-size:11px;
-
-}
-
+    border:1px solid #999;
+    flex-shrink:0;
 }
 #judulPeta{
     position: absolute;
@@ -97,13 +73,75 @@ html, body, #map {
     font-size: 13px;
     font-weight: bold;
 }
+/* Desktop */
+@media (min-width: 1025px){
+    #menuKomoditas{
+        top: 15px;
+        left: 60px;
+        width: 260px;
+    }
+}
 
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1024px){
+    #menuKomoditas{
+        top: 15px;
+        left: 55px;
+        width: 220px;
+    }
+}
 
+/* HP */
+@media (max-width: 767px){
+    #menuKomoditas{
+        top: 70px;
+        left: 10px;
+        width: calc(100% - 20px);
+    }
+}
+#menuKomoditas select{
+    width:100%;
+    padding:8px;
+    font-size:15px;
+    box-sizing:border-box;
+}
 </style>
         <title>Peta Persebaran Ketersediaan Pangan Kabupaten Brebes</title>
     </head>
     <body>
-        
+        <div id="menuKomoditas">
+    <label><b>Komoditas Pangan</b></label><br><br>
+
+    <select id="komoditas" onchange="gantiKomoditas()">
+        <option value="peta">Peta Administrasi</option>
+        <option value="padi">Padi</option>
+        <option value="jagung">Jagung</option>
+        <option value="cabai">Cabai Besar</option>
+        <option value="bawang">Bawang Merah</option>
+        <option value="kacang">Kacang Hijau</option>
+    </select>
+    <div id="legend">
+    <div class="legend-item">
+        <span class="warna" style="background:#FFFFFF;"></span>
+        Level 0 – Tidak Produksi
+    </div>
+
+    <div class="legend-item">
+        <span class="warna" style="background:#90EE90;"></span>
+        Level 1 – Rendah
+    </div>
+
+    <div class="legend-item">
+        <span class="warna" style="background:#2E8B57;"></span>
+        Level 2 – Sedang
+    </div>
+
+    <div class="legend-item">
+        <span class="warna" style="background:#006400;"></span>
+        Level 3 – Tinggi
+    </div>
+</div>
+</div>
 
 <div id="judulPeta">
     Peta Persebaran Ketersediaan Pangan Kabupaten Brebes
@@ -203,70 +241,6 @@ map.setView([-6.95, 109.05], 9.4);
         var zoomControl = L.control.zoom({
             position: 'topleft'
         }).addTo(map);
-        var menu = L.control({position:'topleft'});
-
-menu.onAdd = function(){
-
-    var div = L.DomUtil.create('div','leaflet-control custom-menu');
-
-    div.innerHTML = `
-
-    <h4>Komoditas Pangan</h4>
-
-    <select id="komoditas">
-
-        <option value="peta">Peta Administrasi</option>
-        <option value="padi">Padi</option>
-        <option value="jagung">Jagung</option>
-        <option value="cabai">Cabai Besar</option>
-        <option value="bawang">Bawang Merah</option>
-        <option value="kacang">Kacang Hijau</option>
-
-    </select>
-
-    <div id="legend">
-
-        <div class="legend-item">
-            <span class="warna" style="background:white"></span>
-            Level 0
-        </div>
-
-        <div class="legend-item">
-            <span class="warna" style="background:#90EE90"></span>
-            Level 1
-        </div>
-
-        <div class="legend-item">
-            <span class="warna" style="background:#2E8B57"></span>
-            Level 2
-        </div>
-
-        <div class="legend-item">
-            <span class="warna" style="background:#006400"></span>
-            Level 3
-        </div>
-
-    </div>
-
-    `;
-
-    L.DomEvent.disableClickPropagation(div);
-
-    return div;
-
-};
-
-menu.addTo(map);
-
-document.addEventListener("change",function(e){
-
-    if(e.target.id==="komoditas"){
-
-        gantiKomoditas();
-
-    }
-
-});
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
             map.setMaxBounds(map.getBounds());
@@ -1154,7 +1128,7 @@ Number(feature.properties['Cabai Besar']).toLocaleString('id-ID') + ' Kwintal'
         //});
     function gantiKomoditas() {
 
-    var pilih = document.querySelector("#komoditas").value;
+    var pilih = document.getElementById("komoditas").value;
 
     // Sembunyikan semua layer komoditas
 map.removeLayer(layer_petaketersediaanpanganbrebes_6);
