@@ -21,8 +21,9 @@ html, body, #map {
 
 #menuKomoditas{
     position:absolute;
-    top:90px;
-    left:10px;
+    top:15px;
+    left:60px;
+
     z-index:9999;
     background:rgba(255, 255, 255, 0.250);
     padding:5px;
@@ -74,36 +75,31 @@ html, body, #map {
     font-weight: bold;
 }
 /* Desktop */
-@media (min-width: 1025px){
+@media (min-width:1025px){
     #menuKomoditas{
-        top: 15px;
-        left: 60px;
-        width: 260px;
+        width:220px;
     }
 }
 
 /* Tablet */
-@media (min-width: 768px) and (max-width: 1024px){
+@media (max-width:1024px){
     #menuKomoditas{
-        top: 15px;
-        left: 55px;
-        width: 220px;
+        width:180px;
     }
 }
 
 /* HP */
-@media (max-width: 767px){
+@media (max-width:768px){
     #menuKomoditas{
-        top: 70px;
-        left: 10px;
-        width: calc(100% - 20px);
+        width:150px;
+        top:10px;
+        left:50px;
     }
 }
 #menuKomoditas select{
     width:100%;
-    padding:8px;
-    font-size:15px;
-    box-sizing:border-box;
+    font-size:14px;
+    padding:6px;
 }
 </style>
         <title>Peta Persebaran Ketersediaan Pangan Kabupaten Brebes</title>
